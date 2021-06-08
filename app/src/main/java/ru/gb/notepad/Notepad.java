@@ -6,7 +6,7 @@ public class Notepad {
     private final ArrayList<Notice> noticeList;
 
     public Notepad() {
-        noticeList = new ArrayList<>();
+        noticeList = new ArrayList<Notice>();
     }
 
     public void addNotice(Notice notice) {

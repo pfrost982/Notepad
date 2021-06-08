@@ -1,57 +1,68 @@
 package ru.gb.notepad;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Calendar;
 
-public class Notice {
-    private StringBuilder title;
-    private StringBuilder description;
-    private Calendar dateOfCreation;
-    private Calendar dateOfEditing;
+public class Notice implements Parcelable {
+    private String title;
+    private String description;
+    private String dateOfCreation;
+    private String dateOfEditing;
 
     public Notice(String title, String description) {
-        this.title = new StringBuilder(title);
-        this.description = new StringBuilder(description);
-        this.dateOfCreation = Calendar.getInstance();
-        this.dateOfEditing = Calendar.getInstance();
+        this.title = title;
+        this.description = description;
+        this.dateOfCreation = Calendar.getInstance().getTime().toString();
+        this.dateOfEditing = Calendar.getInstance().getTime().toString();
     }
 
-    public StringBuilder getTitle() {
+    protected Notice(Parcel in) {
+        title = in.readString();
+        description = in.readString();
+        dateOfCreation = in.readString();
+        dateOfEditing = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeString(dateOfCreation);
+        dest.writeString(dateOfEditing);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Notice> CREATOR = new Creator<Notice>() {
+        @Override
+        public Notice createFromParcel(Parcel in) {
+            return new Notice(in);
+        }
+
+        @Override
+        public Notice[] newArray(int size) {
+            return new Notice[size];
+        }
+    };
+
+    public String getTitle() {
         return title;
     }
 
-    public StringBuilder getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public Calendar getDateOfCreation() {
+    public String getDateOfCreation() {
         return dateOfCreation;
     }
 
-    public Calendar getDateOfEditing() {
+    public String getDateOfEditing() {
         return dateOfEditing;
-    }
-
-    public int getCreationYear() {
-        return dateOfCreation.get(Calendar.YEAR);
-    }
-
-    public int getCreationMonth() {
-        return dateOfCreation.get(Calendar.MONTH);
-    }
-
-    public int getCreationDay() {
-        return dateOfCreation.get(Calendar.DAY_OF_MONTH);
-    }
-
-    public int getEditingYear() {
-        return dateOfEditing.get(Calendar.YEAR);
-    }
-
-    public int getEditingMonth() {
-        return dateOfEditing.get(Calendar.MONTH);
-    }
-
-    public int getEditingDay() {
-        return dateOfEditing.get(Calendar.DAY_OF_MONTH);
     }
 }
