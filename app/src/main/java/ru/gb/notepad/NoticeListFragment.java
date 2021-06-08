@@ -3,8 +3,6 @@ package ru.gb.notepad;
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -12,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 
@@ -63,7 +63,7 @@ public class NoticeListFragment extends Fragment {
     }
 
     private void addNoticeToList(Notice notice, int index) {
-        Button button = new Button(getContext());
+        Button button = new MaterialButton(getContext());
         button.setText(notice.getTitle());
         button.setOnClickListener(v -> {
             ((Controller) getActivity()).openNotice(notice, index);

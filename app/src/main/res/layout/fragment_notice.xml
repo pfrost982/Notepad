@@ -4,44 +4,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="@dimen/padding"
     tools:showIn=".MainActivity">
 
     <EditText
         android:id="@+id/title_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Название"
+        android:hint="@string/title"
         android:singleLine="true"
-        android:textSize="32sp" />
+        android:textSize="@dimen/text_size" />
 
     <EditText
         android:id="@+id/description_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Описание"
-        android:textSize="32sp" />
+        android:hint="@string/description"
+        android:textSize="@dimen/text_size" />
 
     <EditText
         android:id="@+id/date_of_creation_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Дата создания"
+        android:hint="@string/date_creation"
         android:singleLine="true"
-        android:textSize="32sp" />
+        android:textSize="@dimen/text_size" />
 
     <EditText
         android:id="@+id/date_of_editing_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Дата редактированя"
+        android:hint="@string/date_editing"
         android:singleLine="true"
-        android:textSize="32sp" />
+        android:textSize="@dimen/text_size" />
 
     <Button
         android:id="@+id/save_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Сохранить" />
-
+        android:text="@string/save" />
 </LinearLayout>

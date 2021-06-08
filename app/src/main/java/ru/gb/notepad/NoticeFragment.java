@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class NoticeFragment extends Fragment {
     private static final String ARG_NOTICE_INDEX = "noticeIndex";
@@ -21,6 +23,12 @@ public class NoticeFragment extends Fragment {
     private String description;
     private String dateOfCreation;
     private String dateOfEditing;
+
+    private EditText titleEt;
+    private EditText descriptionEt;
+    private EditText dateOfCreationEt;
+    private EditText dateOfEditingEt;
+    private Button saveBt;
 
     public NoticeFragment() {
     }
@@ -61,7 +69,28 @@ public class NoticeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_notice, container, false);
+        return inflater.inflate(R.layout.fragment_notice, null);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        titleEt = view.findViewById(R.id.title_edit_text);
+        descriptionEt = view.findViewById(R.id.description_edit_text);
+        dateOfCreationEt = view.findViewById(R.id.date_of_creation_edit_text);
+        dateOfEditingEt = view.findViewById(R.id.date_of_editing_edit_text);
+        saveBt = view.findViewById(R.id.save_button);
+        saveBt.setOnClickListener(v -> {
+            Controller controller = (Controller) getActivity();
+            controller.saveNotice(new Notice(titleEt.getText().toString(),
+                    descriptionEt.getText().toString()), noticeIndex);
+        });
+
+
+        titleEt.setText(title);
+        descriptionEt.setText(description);
+        dateOfCreationEt.setText(dateOfCreation);
+        dateOfEditingEt.setText(dateOfEditing);
     }
 
     public interface Controller {
