@@ -7,8 +7,6 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity implements NoticeFragment.Controller, NoticeListFragment.Controller {
     private Notepad notepad;
-    private NoticeListFragment noticeListFragment;
-    private NoticeFragment noticeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,36 +18,34 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
         notepad.addNotice(new Notice("Жена", "Не забыть позвонить жене"));
         notepad.addNotice(new Notice("Ремонт", "Отремонтировать дверную ручку в детской"));
         notepad.addNotice(new Notice("Уроки", "Дописать шестую домашнюю работу"));
-        noticeListFragment = NoticeListFragment.newInstance(notepad.getNoticeList());
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container, noticeListFragment)
+                .replace(R.id.container, NoticeListFragment.newInstance(notepad.getNoticeList()))
                 .commit();
     }
 
     @Override
     public void saveNotice(Notice notice, int noticeIndex) {
-        noticeListFragment = NoticeListFragment.newInstance(notepad.getNoticeList());
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container, noticeListFragment)
+                .replace(R.id.container, NoticeListFragment.newInstance(notepad.getNoticeList()))
                 .commit();
     }
 
     @Override
     public void openNotice(Notice notice, int noticeIndex) {
         boolean isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-        noticeFragment = NoticeFragment.newInstance(noticeIndex, notice.getTitle(),
-                notice.getDescription(), notice.getDateOfCreation(), notice.getDateOfEditing());
         if (isLandscape) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.detail_container, noticeFragment)
+                    .replace(R.id.detail_container, NoticeFragment.newInstance(noticeIndex, notice.getTitle(),
+                            notice.getDescription(), notice.getDateOfCreation(), notice.getDateOfEditing()))
                     .commit();
         } else {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.container, noticeFragment)
+                    .replace(R.id.container, NoticeFragment.newInstance(noticeIndex, notice.getTitle(),
+                            notice.getDescription(), notice.getDateOfCreation(), notice.getDateOfEditing()))
                     .commit();
         }
     }
