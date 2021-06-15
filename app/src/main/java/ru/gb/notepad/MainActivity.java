@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements NoticeFragment.Controller, NoticeListFragment.Controller {
     private Notepad notepad;
@@ -16,6 +19,27 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        int id = item.getItemId();
+                        switch (id) {
+                            case R.id.action_add:
+                                Log.d("@@@", "onNavigationItemSelected: add");
+                                return true;
+                            case R.id.action_settings:
+                                Log.d("@@@", "onNavigationItemSelected: settings");
+                                return true;
+                            case R.id.action_save:
+                                Log.d("@@@", "onNavigationItemSelected: save");
+                        }
+                        return true;
+                    }
+                });
+
         notepad = new Notepad();
         notepad.addNotice(new Notice("Магазин", "Купить морковку и картошку"));
         notepad.addNotice(new Notice("Будильник", "Не забыть поставить будильник"));

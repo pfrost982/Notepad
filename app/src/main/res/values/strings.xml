@@ -9,4 +9,6 @@
     <string name="delete">Удалить</string>
     <string name="edit">Редактировать</string>
     <string name="show">Показать</string>
+    <string name="add">Добавить заметку</string>
+    <string name="settings">Настройки</string>
 </resources>
