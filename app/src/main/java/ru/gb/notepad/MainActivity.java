@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
                 });
 
         notepad = new Notepad();
+
         notepad.addNotice(new Notice("Магазин", "Купить морковку и картошку"));
         notepad.addNotice(new Notice("Будильник", "Не забыть поставить будильник"));
         notepad.addNotice(new Notice("Жена", "Не забыть позвонить жене"));
