@@ -62,11 +62,11 @@ public class NoticeListFragment extends Fragment {
         linearLayout = view.findViewById(R.id.linear_id);
 
         for (int i = 0; i < noticeList.size(); i++) {
-            addNoticeToList(noticeList.get(i), i);
+            addNoticeToList(noticeList.get(i));
         }
     }
 
-    private void addNoticeToList(Notice notice, int index) {
+    private void addNoticeToList(Notice notice) {
         Button button = new MaterialButton(getContext());
         button.setText(notice.title);
         Activity activity = requireActivity();
@@ -83,7 +83,7 @@ public class NoticeListFragment extends Fragment {
                         Toast.makeText(getContext(), "Почти отредактировал", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.item3_popup:
-                        ((Controller) getActivity()).openNotice(notice, index);
+                        ((Controller) getActivity()).openNotice(notice);
                         return true;
                 }
                 return true;
@@ -94,7 +94,7 @@ public class NoticeListFragment extends Fragment {
     }
 
     public interface Controller {
-        void openNotice(Notice notice, int noticeIndex);
+        void openNotice(Notice notice);
     }
 
 }

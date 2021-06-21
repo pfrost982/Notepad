@@ -64,8 +64,8 @@ public class NoticeFragment extends Fragment {
         saveBt = view.findViewById(R.id.save_button);
         saveBt.setOnClickListener(v -> {
             Controller controller = (Controller) getActivity();
-            controller.saveNotice(new Notice(idEt.getText().toString(), titleEt.getText().toString(),
-                    descriptionEt.getText().toString(), Long.parseLong(dateOfCreationEt.toString())));
+            controller.saveNotice(new Notice(notice.id, titleEt.getText().toString(),
+                    descriptionEt.getText().toString(), notice.dateOfCreation));
         });
 
         idEt.setText(notice.id);

@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
     }
 
     @Override
-    public void openNotice(Notice notice, int noticeIndex) {
+    public void openNotice(Notice notice) {
         boolean isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
         if (isLandscape) {
             getSupportFragmentManager()
