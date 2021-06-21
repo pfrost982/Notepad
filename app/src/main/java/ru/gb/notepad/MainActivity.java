@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
                     switch (id) {
                         case R.id.action_add:
                             Log.d("@@@", "onNavigationItemSelected: add");
+                            openNotice(new Notice(Notice.generateNewId(), "Новая", "Новая", Notice.getCurrentDate()));
                             return true;
                         case R.id.action_settings:
                             Log.d("@@@", "onNavigationItemSelected: settings");
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
 
     @Override
     public void saveNotice(Notice notice) {
+        notepad.addNotice(notice);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, NoticeListFragment.newInstance(notepad.getNoticeList()))

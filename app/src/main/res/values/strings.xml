@@ -11,4 +11,5 @@
     <string name="add">Добавить заметку</string>
     <string name="settings">Настройки</string>
     <string name="id">id</string>
+    <string name="create_note_button">Новая заметка</string>
 </resources>
