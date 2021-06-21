@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
     }
 
     @Override
-    public void saveNotice(Notice notice, int noticeIndex) {
+    public void saveNotice(Notice notice) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, NoticeListFragment.newInstance(notepad.getNoticeList()))
@@ -93,14 +93,12 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
         if (isLandscape) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.detail_container, NoticeFragment.newInstance(noticeIndex, notice.getTitle(),
-                            notice.getDescription(), notice.getDateOfCreation(), notice.getDateOfEditing()))
+                    .replace(R.id.detail_container, NoticeFragment.newInstance(notice))
                     .commit();
         } else {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.container, NoticeFragment.newInstance(noticeIndex, notice.getTitle(),
-                            notice.getDescription(), notice.getDateOfCreation(), notice.getDateOfEditing()))
+                    .replace(R.id.container, NoticeFragment.newInstance(notice))
                     .commit();
         }
     }

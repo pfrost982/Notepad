@@ -13,6 +13,7 @@ public class Notice implements Parcelable {
     public final long dateOfCreation;
 
     public Notice(String id, String title, String description, long dateOfCreation) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.dateOfCreation = dateOfCreation;
