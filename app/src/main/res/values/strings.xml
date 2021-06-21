@@ -2,7 +2,6 @@
     <string name="app_name">Notepad</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="save">Сохранить</string>
-    <string name="date_editing">Дата редактированя</string>
     <string name="date_creation">Дата создания</string>
     <string name="description">Описание</string>
     <string name="title">Название</string>

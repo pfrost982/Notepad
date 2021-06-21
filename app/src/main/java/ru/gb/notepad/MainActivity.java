@@ -54,32 +54,6 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_example, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.action_favorite:
-                Toast.makeText(this, "action_favorite", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.action_main:
-                Toast.makeText(this, "action_main", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.action_search:
-                Toast.makeText(this, "action_search", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.action_settings:
-                Toast.makeText(this, "action_settings", Toast.LENGTH_SHORT).show();
-                return true;
-        }
-        return true;
-    }
-
-    @Override
     public void saveNotice(Notice notice) {
         getSupportFragmentManager()
                 .beginTransaction()
