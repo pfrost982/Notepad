@@ -2,4 +2,8 @@
 <resources>
     <dimen name="text_size">18sp</dimen>
     <dimen name="padding">8dp</dimen>
+    <dimen name="default_padding">8</dimen>
+    <dimen name="note_card_radius">8</dimen>
+    <dimen name="note_item_subject_text_size">12</dimen>
+    <dimen name="note_item_date_text_size">12</dimen>
 </resources>

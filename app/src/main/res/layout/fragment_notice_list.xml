@@ -9,4 +9,5 @@
     android:background="@color/white"
     android:padding="@dimen/padding"
     tools:context=".MainActivity">
+
 </LinearLayout>
