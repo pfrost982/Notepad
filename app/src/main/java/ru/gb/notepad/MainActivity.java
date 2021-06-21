@@ -42,11 +42,11 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
 
         notepad = new Notepad();
 
-        notepad.addNotice(new Notice("Магазин", "Купить морковку и картошку"));
-        notepad.addNotice(new Notice("Будильник", "Не забыть поставить будильник"));
-        notepad.addNotice(new Notice("Жена", "Не забыть позвонить жене"));
-        notepad.addNotice(new Notice("Ремонт", "Отремонтировать дверную ручку в детской"));
-        notepad.addNotice(new Notice("Уроки", "Дописать шестую домашнюю работу"));
+        notepad.addNotice(new Notice(Notice.generateNewId(), "Магазин", "Купить морковку и картошку", Notice.getCurrentDate()));
+        notepad.addNotice(new Notice(Notice.generateNewId(), "Будильник", "Не забыть поставить будильник", Notice.getCurrentDate()));
+        notepad.addNotice(new Notice(Notice.generateNewId(), "Жена", "Не забыть позвонить жене", Notice.getCurrentDate()));
+        notepad.addNotice(new Notice(Notice.generateNewId(), "Ремонт", "Отремонтировать дверную ручку в детской", Notice.getCurrentDate()));
+        notepad.addNotice(new Notice(Notice.generateNewId(), "Уроки", "Дописать шестую домашнюю работу", Notice.getCurrentDate()));
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, NoticeListFragment.newInstance(notepad.getNoticeList()))

@@ -68,7 +68,7 @@ public class NoticeListFragment extends Fragment {
 
     private void addNoticeToList(Notice notice, int index) {
         Button button = new MaterialButton(getContext());
-        button.setText(notice.getTitle());
+        button.setText(notice.title);
         Activity activity = requireActivity();
         button.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(activity, button);
