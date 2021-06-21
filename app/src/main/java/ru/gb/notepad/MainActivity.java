@@ -33,20 +33,11 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
                     return true;
                 });
 
-        notepad = new Notepad();
-        initNotepad();
+        notepad = Notepad.getNotepadInstance();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, NoticeListFragment.newInstance(notepad.getNoticeList()))
                 .commit();
-    }
-
-    private void initNotepad() {
-        notepad.addNotice(new Notice(Notice.generateNewId(), "Магазин", "Купить морковку и картошку", Notice.getCurrentDate()));
-        notepad.addNotice(new Notice(Notice.generateNewId(), "Будильник", "Не забыть поставить будильник", Notice.getCurrentDate()));
-        notepad.addNotice(new Notice(Notice.generateNewId(), "Жена", "Не забыть позвонить жене", Notice.getCurrentDate()));
-        notepad.addNotice(new Notice(Notice.generateNewId(), "Ремонт", "Отремонтировать дверную ручку в детской", Notice.getCurrentDate()));
-        notepad.addNotice(new Notice(Notice.generateNewId(), "Уроки", "Дописать шестую домашнюю работу", Notice.getCurrentDate()));
     }
 
     @Override
