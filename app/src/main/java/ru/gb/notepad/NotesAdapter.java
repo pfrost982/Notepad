@@ -3,6 +3,7 @@ package ru.gb.notepad;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NoteViewHolder> {
     private OnItemClickListener onItemClickListener;
 
     interface OnItemClickListener {
-        void onItemClick(Notice note);
+        void onItemClick(Notice note, CardView cardView);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

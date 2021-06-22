@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +56,26 @@ public class NoticeListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         adapter = new NotesAdapter();
-        adapter.setOnItemClickListener(getController()::openNotice);
+        adapter.setOnItemClickListener((notice, cardView) -> {
+            PopupMenu popupMenu = new PopupMenu(requireActivity(), cardView);
+            popupMenu.inflate(R.menu.popup);
+            popupMenu.setOnMenuItemClickListener(menuItem -> {
+                int id = menuItem.getItemId();
+                switch (id) {
+                    case R.id.item1_popup:
+                        Toast.makeText(getContext(), "Почти удалил", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.item2_popup:
+                        Toast.makeText(getContext(), "Почти отредактировал", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.item3_popup:
+                        getController().openNotice(notice);
+                        return true;
+                }
+                return true;
+            });
+            popupMenu.show();
+        });
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
         renderList(noticeList);
