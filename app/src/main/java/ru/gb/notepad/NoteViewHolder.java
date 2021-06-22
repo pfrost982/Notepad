@@ -22,7 +22,7 @@ public class NoteViewHolder extends RecyclerView.ViewHolder {
         dateTextView = itemView.findViewById(R.id.date_text_view);
         cardView.setOnClickListener(v -> {
             if (clickListener != null) {
-                clickListener.onItemClick(notice);
+                clickListener.onItemClick(notice, cardView);
             }
         });
     }
