@@ -6,8 +6,7 @@
     <string name="description">Описание</string>
     <string name="title">Название</string>
     <string name="delete">Удалить</string>
-    <string name="edit">Редактировать</string>
-    <string name="show">Показать</string>
+    <string name="open">Открыть</string>
     <string name="add">Добавить заметку</string>
     <string name="settings">Настройки</string>
     <string name="id">id</string>

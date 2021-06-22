@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
     @Override
     public void saveNotice(Notice notice) {
         notepad.addNotice(notice);
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, NoticeListFragment.newInstance(notepad.getNoticeList()))
@@ -57,6 +58,16 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
                 .beginTransaction()
                 .addToBackStack(null)
                 .replace(isLandscape ? R.id.detail_container : R.id.container, NoticeFragment.newInstance(notice))
+                .commit();
+    }
+
+    @Override
+    public void deleteNotice(Notice notice) {
+        notepad.deleteNotice(notice);
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, NoticeListFragment.newInstance(notepad.getNoticeList()))
                 .commit();
     }
 }

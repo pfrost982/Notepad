@@ -62,14 +62,11 @@ public class NoticeListFragment extends Fragment {
             popupMenu.setOnMenuItemClickListener(menuItem -> {
                 int id = menuItem.getItemId();
                 switch (id) {
-                    case R.id.item1_popup:
-                        Toast.makeText(getContext(), "Почти удалил", Toast.LENGTH_SHORT).show();
-                        return true;
-                    case R.id.item2_popup:
-                        Toast.makeText(getContext(), "Почти отредактировал", Toast.LENGTH_SHORT).show();
-                        return true;
-                    case R.id.item3_popup:
+                    case R.id.item_open:
                         getController().openNotice(notice);
+                        return true;
+                    case R.id.item_delete:
+                        getController().deleteNotice(notice);
                         return true;
                 }
                 return true;
@@ -99,5 +96,7 @@ public class NoticeListFragment extends Fragment {
 
     interface Controller {
         void openNotice(Notice notice);
+
+        void deleteNotice(Notice notice);
     }
 }

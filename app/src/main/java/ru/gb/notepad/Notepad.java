@@ -49,4 +49,11 @@ public class Notepad {
         }
         noticeList.add(newNote);
     }
+
+    public void deleteNotice(Notice notice) {
+        Notice sameNote = findNoteWithId(notice.id);
+        if (sameNote != null) {
+            noticeList.remove(sameNote);
+        }
+    }
 }
