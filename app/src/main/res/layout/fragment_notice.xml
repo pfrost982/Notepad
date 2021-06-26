@@ -8,6 +8,14 @@
     tools:showIn=".MainActivity">
 
     <EditText
+        android:id="@+id/id_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/id"
+        android:singleLine="true"
+        android:textSize="@dimen/text_size" />
+
+    <EditText
         android:id="@+id/title_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,14 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/date_creation"
-        android:singleLine="true"
-        android:textSize="@dimen/text_size" />
-
-    <EditText
-        android:id="@+id/date_of_editing_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/date_editing"
         android:singleLine="true"
         android:textSize="@dimen/text_size" />
 
