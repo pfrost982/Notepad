@@ -9,17 +9,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+
+import java.util.Calendar;
 
 public class NoticeFragment extends Fragment {
     private static final String ARG_NOTICE = "ARG_NOTICE";
 
     private Notice notice;
-    private EditText idEt;
     private EditText titleEt;
     private EditText descriptionEt;
-    private EditText dateOfCreationEt;
+    private DatePicker datePicker;
     private Button saveBt;
+    private Calendar calendar;
 
     public NoticeFragment() {
     }
@@ -57,21 +60,30 @@ public class NoticeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        idEt = view.findViewById(R.id.id_edit_text);
         titleEt = view.findViewById(R.id.title_edit_text);
         descriptionEt = view.findViewById(R.id.description_edit_text);
-        dateOfCreationEt = view.findViewById(R.id.date_of_creation_edit_text);
+        datePicker = view.findViewById(R.id.date_picker);
         saveBt = view.findViewById(R.id.save_button);
         saveBt.setOnClickListener(v -> {
             Controller controller = (Controller) getActivity();
             controller.saveNotice(new Notice(notice.id, titleEt.getText().toString(),
-                    descriptionEt.getText().toString(), notice.dateOfCreation));
+                    descriptionEt.getText().toString(), calendar.getTimeInMillis()));
         });
 
-        idEt.setText(notice.id);
         titleEt.setText(notice.title);
         descriptionEt.setText(notice.description);
-        dateOfCreationEt.setText(Long.toString(notice.dateOfCreation));
+        calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(notice.dateOfCreation);
+        datePicker.setCalendarViewShown(false);
+        datePicker.setSpinnersShown(true);
+        datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
+                    @Override
+                    public void onDateChanged(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                        calendar.set(year, monthOfYear, dayOfMonth);
+                    }
+                });
     }
 
     public interface Controller {

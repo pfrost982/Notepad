@@ -11,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity implements NoticeFragment.Controller, NoticeListFragment.Controller {
     private Notepad notepad;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,25 +34,17 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
                     return true;
                 });
 
-        notepad = new Notepad();
-        initNotepad();
+        notepad = Notepad.getNotepadInstance();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, NoticeListFragment.newInstance(notepad.getNoticeList()))
                 .commit();
     }
 
-    private void initNotepad() {
-        notepad.addNotice(new Notice(Notice.generateNewId(), "Магазин", "Купить морковку и картошку", Notice.getCurrentDate()));
-        notepad.addNotice(new Notice(Notice.generateNewId(), "Будильник", "Не забыть поставить будильник", Notice.getCurrentDate()));
-        notepad.addNotice(new Notice(Notice.generateNewId(), "Жена", "Не забыть позвонить жене", Notice.getCurrentDate()));
-        notepad.addNotice(new Notice(Notice.generateNewId(), "Ремонт", "Отремонтировать дверную ручку в детской", Notice.getCurrentDate()));
-        notepad.addNotice(new Notice(Notice.generateNewId(), "Уроки", "Дописать шестую домашнюю работу", Notice.getCurrentDate()));
-    }
-
     @Override
     public void saveNotice(Notice notice) {
         notepad.addNotice(notice);
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, NoticeListFragment.newInstance(notepad.getNoticeList()))
@@ -65,6 +58,16 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
                 .beginTransaction()
                 .addToBackStack(null)
                 .replace(isLandscape ? R.id.detail_container : R.id.container, NoticeFragment.newInstance(notice))
+                .commit();
+    }
+
+    @Override
+    public void deleteNotice(Notice notice) {
+        notepad.deleteNotice(notice);
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, NoticeListFragment.newInstance(notepad.getNoticeList()))
                 .commit();
     }
 }

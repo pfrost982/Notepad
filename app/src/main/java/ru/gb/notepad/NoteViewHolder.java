@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Calendar;
+
 public class NoteViewHolder extends RecyclerView.ViewHolder {
     private final TextView titleTextView;
     private final TextView dateTextView;
@@ -22,7 +24,7 @@ public class NoteViewHolder extends RecyclerView.ViewHolder {
         dateTextView = itemView.findViewById(R.id.date_text_view);
         cardView.setOnClickListener(v -> {
             if (clickListener != null) {
-                clickListener.onItemClick(notice);
+                clickListener.onItemClick(notice, cardView);
             }
         });
     }
@@ -30,6 +32,9 @@ public class NoteViewHolder extends RecyclerView.ViewHolder {
     public void bind(Notice notice) {
         this.notice = notice;
         titleTextView.setText(notice.title);
-        dateTextView.setText(Long.toString(notice.dateOfCreation));
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(notice.dateOfCreation);
+        dateTextView.setText(calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.MONTH)
+                + "." + calendar.get(Calendar.YEAR));
     }
 }

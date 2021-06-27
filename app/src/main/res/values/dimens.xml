@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="text_size">18sp</dimen>
-    <dimen name="padding">8dp</dimen>
+    <dimen name="title_size">24sp</dimen>
     <dimen name="default_padding">8dp</dimen>
     <dimen name="note_card_radius">12dp</dimen>
     <dimen name="note_item_title_text_size">24sp</dimen>
