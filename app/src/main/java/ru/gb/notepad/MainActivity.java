@@ -1,5 +1,6 @@
 package ru.gb.notepad;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.res.Configuration;
@@ -70,6 +71,10 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
 
     @Override
     public void deleteNotice(Notice notice) {
+        new AlertDialog.Builder(this)
+                .setTitle("Зголовок")
+                .setMessage("Текст")
+                .show();
         notepad.deleteNotice(notice);
         refreshNoticeListFragment();
     }
