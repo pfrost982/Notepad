@@ -35,6 +35,17 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
                 });
 
         notepad = Notepad.getNotepadInstance();
+        notepad.setSubscriber(new Runnable() {
+            @Override
+            public void run() {
+                refreshNoticeListFragment();
+            }
+        });
+        refreshNoticeListFragment();
+    }
+
+    private void refreshNoticeListFragment() {
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, NoticeListFragment.newInstance(notepad.getNoticeList()))
@@ -44,11 +55,7 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
     @Override
     public void saveNotice(Notice notice) {
         notepad.addNotice(notice);
-        getSupportFragmentManager().popBackStack();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container, NoticeListFragment.newInstance(notepad.getNoticeList()))
-                .commit();
+        refreshNoticeListFragment();
     }
 
     @Override
@@ -64,10 +71,6 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
     @Override
     public void deleteNotice(Notice notice) {
         notepad.deleteNotice(notice);
-        getSupportFragmentManager().popBackStack();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container, NoticeListFragment.newInstance(notepad.getNoticeList()))
-                .commit();
+        refreshNoticeListFragment();
     }
 }

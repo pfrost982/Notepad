@@ -2,11 +2,19 @@ package ru.gb.notepad;
 
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 
 public class Notepad {
     private ArrayList<Notice> noticeList = null;
     private static Notepad notepad = null;
+    private static final String NOTICES = "NOTICES";
+    private Runnable subscriber;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private Notepad() {
     }
@@ -15,23 +23,35 @@ public class Notepad {
         if (notepad == null) {
             notepad = new Notepad();
             notepad.noticeList = new ArrayList<>();
-            initNotepad();
         }
+        notepad.initNoticeList();
         return notepad;
     }
 
-    private static void initNotepad() {
-        notepad.addNotice(new Notice(Notice.generateNewId(), "Магазин", "Купить морковку и картошку", Notice.getCurrentDate()));
-        notepad.addNotice(new Notice(Notice.generateNewId(), "Будильник", "Не забыть поставить будильник", Notice.getCurrentDate()));
-        notepad.addNotice(new Notice(Notice.generateNewId(), "Жена", "Не забыть позвонить жене", Notice.getCurrentDate()));
-        notepad.addNotice(new Notice(Notice.generateNewId(), "Ремонт", "Отремонтировать дверную ручку в детской", Notice.getCurrentDate()));
-        notepad.addNotice(new Notice(Notice.generateNewId(), "Уроки", "Дописать шестую домашнюю работу", Notice.getCurrentDate()));
+    private void initNoticeList() {
+        db.collection(NOTICES).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
+                    noticeList.add(queryDocumentSnapshot.toObject(Notice.class));
+                }
+                notifySubscriber();
+            }
+        });
+    }
+
+    public void setSubscriber(Runnable subscriber) {
+        this.subscriber = subscriber;
+    }
+
+    private void notifySubscriber() {
+        subscriber.run();
     }
 
     @Nullable
     private Notice findNoteWithId(String id) {
         for (Notice note : noticeList) {
-            if (note.id.equals(id)) {
+            if (note.getId().equals(id)) {
                 return note;
             }
         }
@@ -42,18 +62,24 @@ public class Notepad {
         return noticeList;
     }
 
-    public void addNotice(Notice newNote) {
-        Notice sameNote = findNoteWithId(newNote.id);
+    public void addNotice(Notice notice) {
+        Notice sameNote = findNoteWithId(notice.getId());
         if (sameNote != null) {
             noticeList.remove(sameNote);
         }
-        noticeList.add(newNote);
+        noticeList.add(notice);
+
+        db.collection(NOTICES)
+                .document(notice.getId())
+                .set(notice);
     }
 
     public void deleteNotice(Notice notice) {
-        Notice sameNote = findNoteWithId(notice.id);
+        Notice sameNote = findNoteWithId(notice.getId());
         if (sameNote != null) {
             noticeList.remove(sameNote);
         }
+
+        db.collection(NOTICES).document(notice.getId()).delete();
     }
 }

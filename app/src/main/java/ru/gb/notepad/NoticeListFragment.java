@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +58,7 @@ public class NoticeListFragment extends Fragment {
             PopupMenu popupMenu = new PopupMenu(requireActivity(), cardView);
             popupMenu.inflate(R.menu.popup);
             popupMenu.setOnMenuItemClickListener(menuItem -> {
-                int id = menuItem.getItemId();
-                switch (id) {
+                switch (menuItem.getItemId()) {
                     case R.id.item_open:
                         getController().openNotice(notice);
                         return true;
