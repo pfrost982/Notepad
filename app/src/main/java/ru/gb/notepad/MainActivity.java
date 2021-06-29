@@ -3,6 +3,7 @@ package ru.gb.notepad;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,13 +18,12 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 item -> {
                     int id = item.getItemId();
                     switch (id) {
                         case R.id.action_add:
-                            Log.d("@@@", "onNavigationItemSelected: add");
                             openNotice(new Notice(Notice.generateNewId(), "Новая", "Новая", Notice.getCurrentDate()));
                             return true;
                         case R.id.action_settings:
@@ -72,10 +72,17 @@ public class MainActivity extends AppCompatActivity implements NoticeFragment.Co
     @Override
     public void deleteNotice(Notice notice) {
         new AlertDialog.Builder(this)
-                .setTitle("Зголовок")
-                .setMessage("Текст")
+                .setTitle(R.string.alert)
+                .setMessage(getString(R.string.do_you_want_delete_notice) + notice.getTitle())
+                .setCancelable(false)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        notepad.deleteNotice(notice);
+                        refreshNoticeListFragment();
+                    }
+                })
+                .setNegativeButton(R.string.no, null)
                 .show();
-        notepad.deleteNotice(notice);
-        refreshNoticeListFragment();
     }
 }
