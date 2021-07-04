@@ -11,4 +11,8 @@
     <string name="settings">Настройки</string>
     <string name="id">id</string>
     <string name="create_note_button">Новая заметка</string>
+    <string name="alert">Внимание</string>
+    <string name="do_you_want_delete_notice">Вы действительно хотите удалить заметку :&#160;</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 </resources>
