@@ -7,16 +7,35 @@ import java.util.Calendar;
 import java.util.UUID;
 
 public class Notice implements Parcelable {
-    public final String id;
-    public final String title;
-    public final String description;
-    public final long dateOfCreation;
+    private String id;
+    private String title;
+    private String description;
+    private long dateOfCreation;
+
+    public Notice() {
+    }
 
     public Notice(String id, String title, String description, long dateOfCreation) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.dateOfCreation = dateOfCreation;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public long getDateOfCreation() {
+        return dateOfCreation;
     }
 
     protected Notice(Parcel in) {

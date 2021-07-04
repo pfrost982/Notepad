@@ -17,7 +17,7 @@ public class NoteViewHolder extends RecyclerView.ViewHolder {
     private final CardView cardView;
     private Notice notice;
 
-    public NoteViewHolder(@NonNull ViewGroup parent, @Nullable ru.gb.notepad.NotesAdapter.OnItemClickListener clickListener) {
+    public NoteViewHolder(@NonNull ViewGroup parent, @Nullable NotesAdapter.OnItemClickListener clickListener) {
         super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_note, parent, false));
         cardView = (CardView) itemView;
         titleTextView = itemView.findViewById(R.id.title_text_view);
@@ -31,9 +31,9 @@ public class NoteViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(Notice notice) {
         this.notice = notice;
-        titleTextView.setText(notice.title);
+        titleTextView.setText(notice.getTitle());
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(notice.dateOfCreation);
+        calendar.setTimeInMillis(notice.getDateOfCreation());
         dateTextView.setText(calendar.get(Calendar.DAY_OF_MONTH) + "." + calendar.get(Calendar.MONTH)
                 + "." + calendar.get(Calendar.YEAR));
     }

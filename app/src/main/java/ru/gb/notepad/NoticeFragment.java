@@ -3,6 +3,7 @@ package ru.gb.notepad;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -36,7 +37,7 @@ public class NoticeFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (!(context instanceof Controller)) {
             throw new RuntimeException("Activity must implement NoticeFragment.Controller");
@@ -58,7 +59,7 @@ public class NoticeFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         titleEt = view.findViewById(R.id.title_edit_text);
         descriptionEt = view.findViewById(R.id.description_edit_text);
@@ -66,14 +67,14 @@ public class NoticeFragment extends Fragment {
         saveBt = view.findViewById(R.id.save_button);
         saveBt.setOnClickListener(v -> {
             Controller controller = (Controller) getActivity();
-            controller.saveNotice(new Notice(notice.id, titleEt.getText().toString(),
+            controller.saveNotice(new Notice(notice.getId(), titleEt.getText().toString(),
                     descriptionEt.getText().toString(), calendar.getTimeInMillis()));
         });
 
-        titleEt.setText(notice.title);
-        descriptionEt.setText(notice.description);
+        titleEt.setText(notice.getTitle());
+        descriptionEt.setText(notice.getDescription());
         calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(notice.dateOfCreation);
+        calendar.setTimeInMillis(notice.getDateOfCreation());
         datePicker.setCalendarViewShown(false);
         datePicker.setSpinnersShown(true);
         datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
